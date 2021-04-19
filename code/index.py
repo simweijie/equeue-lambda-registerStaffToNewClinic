@@ -55,6 +55,11 @@ def handler(event, context):
             query = "INSERT INTO OpeningHours(opens,closes,dayOfWeek,branchId) VALUES('{}','{}','{}','{}')".format(openingHour['opens'],openingHour['closes'],openingHour['dayOfWeek'],branchId)
             cur.execute(query)
     ##STAFF
+    isAdmin=''
+    if event['job'] =='A' or event['job'] =='D':
+        isAdmin = 'Y'
+    else:
+        isAdmin = 'N'
     query5 = "INSERT INTO Staff(email,password,name,addr,contactNo,job,status,isAdmin,branchId) \
         VALUES('{}','{}','{}','{}','{}','{}','{}','{}','{}')"\
         .format(event['email'], event['password'], event['name'], event['addr'], event['contactNo'], event['job'],'A','Y',staffBranchId)
